@@ -1,0 +1,22 @@
+{
+  "domain": "growatt_vita",
+  "name": "Growatt Portable Power Station (BLE)",
+  "version": "0.1.0",
+  "config_flow": true,
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "documentation": "https://github.com/USUARIO/growatt_vita",
+  "issue_tracker": "https://github.com/USUARIO/growatt_vita/issues",
+  "codeowners": ["@USUARIO"],
+  "dependencies": ["bluetooth"],
+  "bluetooth": [
+    {
+      "manufacturer_id": 14919
+    }
+  ],
+  "requirements": [
+    "bleak>=0.21",
+    "bleak-retry-connector>=3.5",
+    "cryptography>=42.0"
+  ]
+}

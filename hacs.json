@@ -1,0 +1,5 @@
+{
+  "name": "Growatt Portable Power Station (BLE)",
+  "render_readme": true,
+  "homeassistant": "2024.10.0"
+}

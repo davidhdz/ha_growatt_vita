@@ -1,0 +1,26 @@
+{
+  "config": {
+    "flow_title": "Estación de energía Growatt {name}",
+    "step": {
+      "bluetooth_confirm": {
+        "title": "Estación de energía Growatt encontrada",
+        "description": "¿Quieres configurar {name}?"
+      },
+      "user": {
+        "title": "Añadir estación de energía Growatt",
+        "description": "Introduce la dirección Bluetooth (MAC) de la estación de energía {manufacturer}.",
+        "data": {
+          "address": "Dirección Bluetooth"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "Esa no es una dirección Bluetooth (MAC) válida.",
+      "cannot_connect": "No se pudo conectar con el dispositivo."
+    },
+    "abort": {
+      "already_configured": "Este dispositivo ya está configurado.",
+      "no_devices_found": "No se encontraron dispositivos."
+    }
+  }
+}

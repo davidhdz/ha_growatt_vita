@@ -1,0 +1,26 @@
+{
+  "config": {
+    "flow_title": "Growatt Power Station {name}",
+    "step": {
+      "bluetooth_confirm": {
+        "title": "Growatt Power Station found",
+        "description": "Do you want to set up {name}?"
+      },
+      "user": {
+        "title": "Add Growatt Power Station",
+        "description": "Enter the Bluetooth (MAC) address of the {manufacturer} power station.",
+        "data": {
+          "address": "Bluetooth address"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "That is not a valid Bluetooth (MAC) address.",
+      "cannot_connect": "Could not connect to the device."
+    },
+    "abort": {
+      "already_configured": "This device is already configured.",
+      "no_devices_found": "No devices found."
+    }
+  }
+}
