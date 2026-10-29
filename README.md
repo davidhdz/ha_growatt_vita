@@ -34,7 +34,7 @@ full protocol write-up.
 2. Add the URL of this repository, category **Integration**.
 3. Install **Growatt Portable Power Station (BLE)** and restart Home Assistant.
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=USUARIO&repository=growatt_vita&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=davidhdz&repository=growatt_vita&category=integration)
 
 ### Manual
 
