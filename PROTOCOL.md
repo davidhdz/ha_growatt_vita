@@ -1,9 +1,9 @@
 # Growatt portable power station — BLE protocol (reverse-engineered)
 
 Device under test: **Growatt VITA 500 PRO**
-- BLE name `902D25FF002G`, MAC `9C:9E:6E:EB:70:1E`
-- WiFi module MAC `9C:9E:6E:EB:70:1C` (Espressif, no open TCP ports)
-- datalog SN reported by the device: `0JAR902D25`
+- BLE name `XXXXXXFFXXXX`, MAC `9C:9E:6E:XX:XX:XX`
+- WiFi module MAC `9C:9E:6E:XX:XX:XX` (Espressif, no open TCP ports)
+- datalog SN reported by the device: `0JARXXXXXX`
 
 Source: decompiled MyGro APK (`com.growatt.mygro`). Everything below is **validated against
 the decompiled code AND against live BLE traffic** from this device.
@@ -33,7 +33,7 @@ Scope of this document: **read-only** (FC3/FC4). Write commands (FC6) are listed
 | 1801/2a05 | indicate |
 | 1800/2aa6,2a00,2a01 | read (device info) |
 
-- Advertised name `902D25FF002G`. Not bonded.
+- Advertised name `XXXXXXFFXXXX`. Not bonded.
 - Enable notifications on `ff01`; write requests to `ff01` with **response = True**.
 - There is **no app-level BLE password** (`InputBlePwdDialog`/`SettingBlePwdDialog` are dead code).
   The only gate is the **BLE key** (§3).
@@ -48,7 +48,7 @@ Scope of this document: **read-only** (FC3/FC4). Write commands (FC6) are listed
 2. **Send BLE key** with `Protocol0X18.newInstance(54, "growatt_iot_device_common_key_01")`.
    - `54` = `Param.ParamNoConstant.PARAM_NO_SECRET_KEY`.
    - Reply: `protocolVersion = (reply[3] == 7) ? 7 : 5`; success when `plain[12] == 0`.
-   - The device echoes datalog SN `0JAR902D25` in the reply.
+   - The device echoes datalog SN `0JARXXXXXX` in the reply.
 3. **Poll loop** (`PowerDevice2000ProPresenter`):
    - send `04_1` = FC4 read `start=0, count=125`  → reply → `Data04`
    - send `04_2` = FC4 read `start=125, count=91` → reply → `Data05`
@@ -240,7 +240,7 @@ the grid isolates input-side registers.
 
 ## 5. Reference live capture
 
-`04_1` (regs 0..124) from `9C:9E:6E:EB:70:1E`, one sample:
+`04_1` (regs 0..124) from `9C:9E:6E:XX:XX:XX`, one sample:
 
 ```
 R0  powerStatus        = 2
