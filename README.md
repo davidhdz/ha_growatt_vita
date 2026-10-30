@@ -1,5 +1,10 @@
 # Growatt Portable Power Station (BLE)
 
+> **AI-assisted:** This integration was developed with the help of AI
+> (OpenCode, running DeepSeek V4.1 Flash Free). All code, protocol analysis
+> and documentation were reviewed and validated by the maintainer against
+> real hardware.
+
 A Home Assistant custom integration for **Growatt portable power stations**
 (VITA / Infinity series) that speak the **v7 AES BLE protocol** over the
 `FF01`/`FF02` GATT service — no cloud, no dongle.
