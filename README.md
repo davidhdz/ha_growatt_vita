@@ -17,6 +17,8 @@ full protocol write-up.
 - Read-only sensors: battery SoC, temperature, AC/DC/USB/solar power, AC input
   & output voltage/frequency, remaining runtime, fault/warning flags and the
   emergency-LED mode.
+- Energy counters (kWh) for AC output, AC input, solar input, DC output and
+  USB, derived by integrating the power readings over time.
 - Switches: AC output, USB output, DC / 12 V car output and Power boost (Watt+).
 
 ## Requirements
@@ -68,6 +70,11 @@ Station (BLE)** and enter its Bluetooth (MAC) address.
 | USB output | switch | 80 | state reg 8 |
 | DC output | switch | 90 | state reg 126 |
 | Power boost | switch | 89 | no read-back (optimistic) |
+| AC output energy | sensor | ∫ 9 | kWh, computed |
+| AC input energy | sensor | ∫ 36 | kWh, computed |
+| Solar input energy | sensor | ∫ 3 | kWh, computed |
+| DC output energy | sensor | ∫ 5 | kWh, computed |
+| USB energy | sensor | ∫ 55-59, 63 | kWh, computed |
 
 ## Notes on control
 
@@ -78,6 +85,23 @@ only writes when a change is needed.
 The emergency LED is **status-only**: it is driven by the physical button, and
 BLE writes to its registers are rejected by the firmware (Modbus exception
 `0x86 0x01`).
+
+## Energy dashboard
+
+The device has no kWh register, so the integration derives energy by
+integrating the power sensors over time (trapezoidal rule, 30 s polling). The
+counters survive restarts and skip gaps longer than 90 s.
+
+Suggested mapping in **Settings → Dashboards → Energy**:
+
+| Dashboard field | Sensor |
+|-----------------|--------|
+| Solar production | `sensor..._solar_input_energy` |
+| Grid consumption | `sensor..._ac_input_energy` (only when plugged into the grid) |
+| Individual devices | `sensor..._ac_output_energy` (+ `_dc_output_energy` / `_usb_energy`) |
+
+Do not use both the input and output counters as "consumption" at the same
+time, or the dashboard will double-count.
 
 ## Disclaimer
 

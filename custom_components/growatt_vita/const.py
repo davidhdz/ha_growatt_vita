@@ -61,6 +61,22 @@ class SwitchDescription:
     icon: str | None = None
 
 
+@dataclass(frozen=True)
+class EnergyDescription:
+    """Describes a computed energy (kWh) sensor derived from power sensors.
+
+    The device exposes no kWh register, so energy is obtained by integrating
+    one or more power sensors over time.  ``source_keys`` are the keys of the
+    power sensors in the coordinator data; when more than one is given their
+    values are summed (e.g. all USB ports).
+    """
+
+    key: str
+    source_keys: tuple[str, ...]
+    name: str
+    icon: str | None = None
+
+
 # field -> register. reg N = plain[15 + 2N]; Data04/Data05 reference.
 SENSORS: tuple[SensorDescription, ...] = (
     SensorDescription("soc", 18, "Battery", "battery", None, "%", scale=1.0, word_count=1),
@@ -155,4 +171,50 @@ SWITCHES: tuple[SwitchDescription, ...] = (
     SwitchDescription("usb_output", 80, 1, 8, "USB output", "mdi:usb"),
     SwitchDescription("dc_output", 90, 1, 126, "DC output", "mdi:car-power"),
     SwitchDescription("watt_plus", 89, 1, None, "Power boost", "mdi:flash"),
+)
+
+# The device has no kWh register, so energy is integrated from power.  A single
+# integration step is only taken when the elapsed time is at most this many
+# seconds; longer gaps (HA stopped, BLE outage) are skipped so they do not
+# produce a false jump in the accumulated energy.
+MAX_ENERGY_GAP_SECONDS = 90.0
+
+ENERGY_SENSORS: tuple[EnergyDescription, ...] = (
+    EnergyDescription(
+        "ac_output_energy",
+        ("ac_output_power",),
+        "AC output energy",
+        icon="mdi:transmission-tower-export",
+    ),
+    EnergyDescription(
+        "ac_input_energy",
+        ("ac_input_power",),
+        "AC input energy",
+        icon="mdi:transmission-tower-import",
+    ),
+    EnergyDescription(
+        "solar_input_energy",
+        ("solar_input_power",),
+        "Solar input energy",
+        icon="mdi:solar-power-variant",
+    ),
+    EnergyDescription(
+        "dc_output_energy",
+        ("dc_output_power",),
+        "DC output energy",
+        icon="mdi:car-power",
+    ),
+    EnergyDescription(
+        "usb_energy",
+        (
+            "usb1_power",
+            "usb2_power",
+            "usb3_power",
+            "usb4_power",
+            "usbc1_power",
+            "usbc2_power",
+        ),
+        "USB energy",
+        icon="mdi:usb",
+    ),
 )

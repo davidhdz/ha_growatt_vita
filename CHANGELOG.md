@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.2.0] - 2026-10-29
+
+### Added
+
+- Energy counters (kWh) computed by integrating the power sensors over time:
+  AC output, AC input, solar input, DC output and USB.
+- `RestoreSensor`-backed accumulation: values survive Home Assistant restarts.
+- Gaps longer than 90 s (HA stopped, BLE outage) are skipped so they do not
+  create false jumps in the accumulated energy.
+
 ## [0.1.0] - 2026-10-15
 
 ### Added

@@ -14,6 +14,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import SENSORS, SensorDescription
 from .coordinator import GrowattVitaCoordinator
+from .energy import async_setup_energy
 from .entity import GrowattVitaEntity
 
 
@@ -26,6 +27,7 @@ async def async_setup_entry(
     async_add_entities(
         GrowattVitaSensor(coordinator, desc) for desc in SENSORS
     )
+    async_setup_energy(coordinator, async_add_entities)
 
 
 class GrowattVitaSensor(GrowattVitaEntity, SensorEntity):
