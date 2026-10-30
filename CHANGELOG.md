@@ -12,6 +12,11 @@ All notable changes to this project are documented in this file.
 - Gaps longer than 90 s (HA stopped, BLE outage) are skipped so they do not
   create false jumps in the accumulated energy.
 
+### Changed
+
+- Remaining runtime is now exposed in hours (`h`) so Home Assistant renders it
+  as `Xh Ym` (e.g. `6h 27m`) instead of a raw minute count.
+
 ## [0.1.0] - 2026-10-15
 
 ### Added

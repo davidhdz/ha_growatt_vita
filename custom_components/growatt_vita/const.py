@@ -109,7 +109,8 @@ SENSORS: tuple[SensorDescription, ...] = (
         "Remaining runtime",
         "duration",
         "measurement",
-        "min",
+        "h",
+        scale=1 / 60,
         icon="mdi:timer-sand",
     ),
     SensorDescription(

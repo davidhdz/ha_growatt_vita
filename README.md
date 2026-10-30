@@ -63,7 +63,7 @@ Station (BLE)** and enter its Bluetooth (MAC) address.
 | Solar / car input power | sensor | 3 | W (32-bit) |
 | AC charging power | sensor | 36 | W (32-bit) |
 | DC / USB-A / USB-C power | sensor | 5, 55-59, 63 | W |
-| Remaining runtime | sensor | 31 | min (unknown while on grid) |
+| Remaining runtime | sensor | 31 | h, shown as `Xh Ym` (unknown while on grid) |
 | Fault code / Warnings | sensor | 40 / 41-43 | |
 | Emergency light | sensor | 144 | `off` / `steady` / `flashing` (read-only) |
 | AC output | switch | 0 | state reg 11 |
